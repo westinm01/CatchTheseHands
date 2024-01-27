@@ -14,7 +14,11 @@ public class Player : MonoBehaviour
 
     Animator anim;
 
+    int health = 3;
+
     public int jumpState = 0; // 0 = grounded, 1 = 1 jump, 2 = 2 jumps.
+
+    public GameObject jumpCircle;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,8 +45,14 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.UpArrow) && jumpState < 3)
         {
+            if(jumpState == 0){
+                jumpState++;
+            }
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpState++;
+            if(jumpState == 3){
+                Instantiate(jumpCircle, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), Quaternion.identity);
+            }
         }
 
         anim.SetInteger("MoveState", jumpState);
@@ -55,5 +65,21 @@ public class Player : MonoBehaviour
         {
             jumpState = 0;
         }
+    }
+
+    public int GetHealth(){
+        if(health < 0){
+            health = 0;
+        }
+        return health;
+    }
+    public void SetHealth(int newHealth){
+        health = newHealth;
+    }
+    public void DecreaseHealth(){
+        health--;
+    }
+    public void IncreaseHealth(){
+        health++;
     }
 }

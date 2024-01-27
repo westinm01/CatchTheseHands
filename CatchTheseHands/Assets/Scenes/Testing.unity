@@ -1157,6 +1157,7 @@ MonoBehaviour:
   jumpForce: 4
   hopForce: 1.5
   jumpState: 1
+  jumpCircle: {fileID: 1755646563964668863, guid: b61c80df5fb7e47459681f0610c8229a, type: 3}
 --- !u!95 &1088389367
 Animator:
   serializedVersion: 7
