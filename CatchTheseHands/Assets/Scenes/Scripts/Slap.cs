@@ -17,6 +17,10 @@ public class Slap : MonoBehaviour
     public int numPoints = 3;
     private List<Vector2> points = new List<Vector2>();
 
+    public AudioClip slapSound;
+
+    public AudioClip killSound;
+
     void Start()
     {
         points.Add(initialPosition);

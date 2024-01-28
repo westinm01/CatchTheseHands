@@ -7,11 +7,13 @@ public class Enemy : MonoBehaviour
     GameObject worldCanvas;
     private int health;
     public int initialHealth = 100;
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
         health = initialHealth;
         //find worldcanvas by tag
+        audio = GetComponent<AudioSource>();
         worldCanvas = GameObject.FindGameObjectsWithTag("WorldCanvas")[0];
     }
 
@@ -31,8 +33,15 @@ public class Enemy : MonoBehaviour
             damage = Random.Range(lowBound, highBound);
             damage = isCritical ? damage * 2 : damage;
             health -= damage;
+            
             if(health <= 0){
                 health = 0;
+                audio.clip = other.gameObject.GetComponent<Slap>().killSound;
+                audio.Play();
+            }
+            else{
+                audio.clip = other.gameObject.GetComponent<Slap>().slapSound;
+                audio.Play();
             }
             transform.GetChild(0).localScale = new Vector3(((float)health)/((float)initialHealth), .1f, 1);
             if(health <= 0){

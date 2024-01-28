@@ -126,6 +126,8 @@ MonoBehaviour:
   initialPosition: {x: -0.5, y: 0.25}
   finalPosition: {x: 1, y: 0.1}
   numPoints: 3
+  slapSound: {fileID: 8300000, guid: b36ca173cfc434d45a359043aec15fd3, type: 3}
+  killSound: {fileID: 8300000, guid: 87725e3b50183874a915d47f0ee5c7d5, type: 3}
 --- !u!61 &1319306235271069433
 BoxCollider2D:
   m_ObjectHideFlags: 0
