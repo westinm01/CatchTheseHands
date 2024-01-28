@@ -6,6 +6,8 @@ public class CanvasManager : MonoBehaviour
 {
     public GameObject Heart;
     public GameObject HeartsGroup;
+
+    public SceneFade sceneFade;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,9 @@ public class CanvasManager : MonoBehaviour
         }
         for(int i = 0; i < numHearts; i++){
             GameObject heart = Instantiate(Heart, new Vector3(0, 0, 0), Quaternion.identity, HeartsGroup.transform);
+        }
+        if(numHearts <= 0){
+            sceneFade.exitScene = true;
         }
     }
 }

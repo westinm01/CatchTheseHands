@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    GameObject worldCanvas;
-    private int health;
+    protected GameObject worldCanvas;
+    protected int health;
     public int initialHealth = 100;
-    AudioSource audio;
+    protected AudioSource audio;
+
+
+
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         health = initialHealth;
         //find worldcanvas by tag
@@ -18,12 +21,12 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
 
-    void OnTriggerEnter2D(Collider2D other){
+    protected virtual void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag == "Slap"){
             int damage = other.gameObject.GetComponent<Slap>().damage;
             int criticalHit = Random.Range(0,100);
@@ -50,7 +53,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Die(){
+    protected virtual void Die(){
         //maybe some type of animation or particle effect
         //get rigid body and add an upward force
         //destroy game object

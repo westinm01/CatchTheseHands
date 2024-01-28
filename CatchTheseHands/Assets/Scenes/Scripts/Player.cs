@@ -35,37 +35,38 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        float x = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(x * speed, rb.velocity.y);
-        if (x == -1){
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else if (x == 1){
-            GetComponent<SpriteRenderer>().flipX = false;
-        }
+        if (health > 0){
+            float x = Input.GetAxisRaw("Horizontal");
+            rb.velocity = new Vector2(x * speed, rb.velocity.y);
+            if (x == -1){
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else if (x == 1){
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
 
-        if ((x == -1 || x == 1) && jumpState == 0){
-            rb.velocity = new Vector2(rb.velocity.x, hopForce);
-            jumpState++;
-        }
-        
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && jumpState < 3)
-        {
-            if(jumpState == 0){
+            if ((x == -1 || x == 1) && jumpState == 0){
+                rb.velocity = new Vector2(rb.velocity.x, hopForce);
                 jumpState++;
             }
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpState++;
-            if(jumpState == 3){
-                Instantiate(jumpCircle, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), Quaternion.identity);
+            
+            if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && jumpState < 3)
+            {
+                if(jumpState == 0){
+                    jumpState++;
+                }
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jumpState++;
+                if(jumpState == 3){
+                    Instantiate(jumpCircle, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), Quaternion.identity);
+                }
             }
-        }
 
-        anim.SetInteger("MoveState", jumpState);
+            anim.SetInteger("MoveState", jumpState);
 
-        if(Input.GetKeyDown(KeyCode.E)){
-            PerformSlap();
+            if(Input.GetKeyDown(KeyCode.E)){
+                PerformSlap();
+            }
         }
     }
 
@@ -90,9 +91,14 @@ public class Player : MonoBehaviour
         else if (collision.gameObject.tag == "Enemy")
         {
             DecreaseHealth();
-            if(health == 0){
-                //display restart level option
-            }
+        }
+    }
+
+    private void OnTriggerEnter2D   (Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Abyss")
+        {
+            SetHealth(0);
         }
     }
 
