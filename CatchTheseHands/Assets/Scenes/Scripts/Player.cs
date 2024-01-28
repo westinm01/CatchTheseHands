@@ -19,10 +19,17 @@ public class Player : MonoBehaviour
     public int jumpState = 0; // 0 = grounded, 1 = 1 jump, 2 = 2 jumps.
 
     public GameObject jumpCircle;
+
+    private CanvasManager canvasManager;
+
+    public GameObject slapPrefab;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        canvasManager = GameObject.Find("Canvas").GetComponent<CanvasManager>(); //improve later
+        canvasManager.UpdateHealth(health);
     }
 
     // Update is called once per frame
@@ -56,14 +63,36 @@ public class Player : MonoBehaviour
         }
 
         anim.SetInteger("MoveState", jumpState);
+
+        if(Input.GetKeyDown(KeyCode.E)){
+            PerformSlap();
+        }
     }
 
+    void PerformSlap(){
+        GameObject slap = Instantiate(slapPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity, gameObject.transform);
+        //slap.GetComponent<Slap>().initialPosition = new Vector2(transform.position.x, transform.position.y);
+        
+        if(GetComponent<SpriteRenderer>().flipX){
+            slap.GetComponent<SpriteRenderer>().flipX = true;
+            Slap slapObject = slap.GetComponent<Slap>();
+            slapObject.initialPosition = new Vector2(0.5f, slapObject.initialPosition.y);
+            slapObject.finalPosition = new Vector2(-1, slapObject.finalPosition.y);
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
             jumpState = 0;
+        }
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            health--;
+            if(health == 0){
+                //display restart level option
+            }
         }
     }
 
@@ -75,11 +104,14 @@ public class Player : MonoBehaviour
     }
     public void SetHealth(int newHealth){
         health = newHealth;
+        canvasManager.UpdateHealth(health);
     }
     public void DecreaseHealth(){
         health--;
+        canvasManager.UpdateHealth(health);
     }
     public void IncreaseHealth(){
         health++;
+        canvasManager.UpdateHealth(health);
     }
 }
