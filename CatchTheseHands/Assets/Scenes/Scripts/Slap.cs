@@ -7,6 +7,7 @@ public class Slap : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    public int damage = 50;
     public float slapTime = 0.5f;
     private float slapTimer = 0;
 

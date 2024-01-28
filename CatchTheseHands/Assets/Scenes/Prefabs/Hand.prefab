@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1319306235271069433}
   m_Layer: 0
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Slap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb8fe21ad5634d888b72cfe11a1c561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 50
   slapTime: 0.24
   initialPosition: {x: -0.5, y: 0.25}
   finalPosition: {x: 1, y: 0.1}

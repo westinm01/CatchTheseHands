@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Slap
+  - WorldCanvas
   layers:
   - Default
   - TransparentFX

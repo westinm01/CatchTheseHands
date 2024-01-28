@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
             jumpState++;
         }
         
-        if (Input.GetKeyDown(KeyCode.UpArrow) && jumpState < 3)
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && jumpState < 3)
         {
             if(jumpState == 0){
                 jumpState++;
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Enemy")
         {
-            health--;
+            DecreaseHealth();
             if(health == 0){
                 //display restart level option
             }
