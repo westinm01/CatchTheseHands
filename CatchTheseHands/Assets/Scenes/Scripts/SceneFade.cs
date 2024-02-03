@@ -10,7 +10,7 @@ public class SceneFade : MonoBehaviour
 
     private float t = 0f;
 
-    private int nextScene = 0;
+    public int nextScene = 0;
 
     private Color nextColor = new Color(0, 0, 0, 0);
 

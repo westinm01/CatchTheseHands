@@ -29,6 +29,7 @@ public class CanvasManager : MonoBehaviour
             GameObject heart = Instantiate(Heart, new Vector3(0, 0, 0), Quaternion.identity, HeartsGroup.transform);
         }
         if(numHearts <= 0){
+            sceneFade.nextScene = 1;
             sceneFade.exitScene = true;
         }
     }

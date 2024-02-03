@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
 
     public GameObject slapPrefab;
 
+    public AudioClip damageSound;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -91,6 +93,7 @@ public class Player : MonoBehaviour
         else if (collision.gameObject.tag == "Enemy")
         {
             DecreaseHealth();
+            GetComponent<AudioSource>().PlayOneShot(damageSound);
         }
     }
 
